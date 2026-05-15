@@ -11,6 +11,7 @@ services:
       - '5500:${APP_PORT}'
     volumes:
       - db_data:/usr/app/db_data
-      - ./live_data:/usr/app/live_data
+      - live_data:/usr/app/live_data
 volumes:
   db_data:
+  live_data:

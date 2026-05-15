@@ -35,6 +35,8 @@ COPY --from=prerelease /usr/app/live_data .
 COPY --from=prerelease /usr/app/package.json .
 COPY --from=prerelease /usr/app/tsconfig.json .
 
+RUN mkdir -p /usr/app/db_data && chown -R bun:bun /usr/app/db_data
+
 ENV APP_PORT=5000
 ARG COMMIT_HASH
 ENV COMMIT_HASH=${COMMIT_HASH}

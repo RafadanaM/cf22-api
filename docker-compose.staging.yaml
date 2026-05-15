@@ -15,6 +15,7 @@ services:
       - '5000:5000'
     volumes:
       - db_data:/usr/app/db_data
-      - ./live_data:/usr/app/live_data
+      - live_data:/usr/app/live_data
 volumes:
   db_data:
+  live_data:
