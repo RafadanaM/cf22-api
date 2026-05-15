@@ -31,7 +31,7 @@ RUN bun run build
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
 COPY --from=prerelease /usr/app/src ./src
-COPY --from=prerelease /usr/app/live_data .
+COPY --from=prerelease /usr/app/live_data ./live_data
 COPY --from=prerelease /usr/app/package.json .
 COPY --from=prerelease /usr/app/tsconfig.json .
 
