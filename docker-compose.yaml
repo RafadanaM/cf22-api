@@ -1,6 +1,6 @@
 services:
   app:
-    image: rafadanam/cf22-api:sha-${IMAGE_TAG}
+    image: rafadanam/cf22-api:latest
     container_name: cf22-api
     restart: always
     env_file:
@@ -8,7 +8,7 @@ services:
     environment:
       - NODE_ENV=production
     ports:
-      - '5000:5000'
+      - '5500:{APP_PORT}'
     volumes:
       - ./db_data:/usr/app/db_data:z
       - ./live_data:/usr/app/live_data:z

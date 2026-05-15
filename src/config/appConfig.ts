@@ -10,7 +10,8 @@ export function createAppConfig(env: AppEnvSchema): AppConfig {
   appConfigInstance = {
     port: env.APP_PORT,
     environment: env.NODE_ENV,
-    commitHash: env.COMMIT_HASH
+    commitHash: env.COMMIT_HASH,
+    origin: env.ORIGIN
   };
 
   return appConfigInstance;

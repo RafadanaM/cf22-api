@@ -37,7 +37,7 @@ function createApp({ appConfig, db }: CreateAppArgs) {
   const app = new Elysia()
     .use(
       cors({
-        origin: true
+        origin: appConfig.origin
       })
     )
     .use(loggerPlugin)
