@@ -21,9 +21,11 @@ FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
-# [optional] tests & build
 ENV NODE_ENV=production
+
+
 RUN bun run build
+
 
 # copy production dependencies and source code into final image
 FROM base AS release
@@ -33,7 +35,10 @@ COPY --from=prerelease /usr/app/live_data .
 COPY --from=prerelease /usr/app/package.json .
 COPY --from=prerelease /usr/app/tsconfig.json .
 
+ENV APP_PORT=5000
+ARG COMMIT_HASH
+ENV COMMIT_HASH=${COMMIT_HASH}
+
 # run the app
 USER bun
-EXPOSE 3000/tcp
 ENTRYPOINT [ "bun", "run", "src/index.ts" ]
