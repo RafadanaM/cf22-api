@@ -1,6 +1,6 @@
 services:
   app:
-    image: rafadanam/cf22-api:sha-${IMAGE_TAG}
+    image: rafadanam/cf22-api:${IMAGE_TAG}
     container_name: cf22-api
     restart: always
     env_file:
