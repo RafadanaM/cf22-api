@@ -24,7 +24,7 @@ jobs:
             set -e
 
             echo "Setting up directories and files..."
-            mkdir -p $HOME/apps/my-app
+            mkdir -p $HOME/apps/cf22-api
             cd $HOME/apps/cf22-api && git pull origin master
 
             echo "Running deploy script..."
