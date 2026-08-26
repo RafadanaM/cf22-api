@@ -20,7 +20,6 @@ function createCircleController(
       }
 
       set.headers['etag'] = version;
-      set.headers['cache-control'] = 'no-cache';
 
       return circles;
     });

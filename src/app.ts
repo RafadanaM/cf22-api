@@ -59,8 +59,7 @@ function createApp({ appConfig, db }: CreateAppArgs) {
   const app = new Elysia()
     .use(
       cors({
-        origin: appConfig.origin,
-        exposeHeaders: ['etag', 'ETag', 'eTag']
+        origin: appConfig.origin
       })
     )
     .use(loggerPlugin)
