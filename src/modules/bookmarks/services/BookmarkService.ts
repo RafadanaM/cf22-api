@@ -1,10 +1,14 @@
+import { nanoid } from 'nanoid';
+
 import { NotFoundError } from '@core/errors/errors';
+
 import type { BookmarkRepository } from '../repositories/BookmarkRepository';
-import type { UserBookmark } from '../types/Bookmark';
+import type { Bookmark, UserBookmark } from '../types/Bookmark';
 
 export interface BookmarkService {
   getBookmark: (id: string) => UserBookmark | null;
   upsertBookmark: (id: string, bookmarkData: UserBookmark) => UserBookmark;
+  createBookmark: (bookmarkData: Bookmark) => UserBookmark;
 }
 
 function createBookmarkService(bookmarkRepository: BookmarkRepository): BookmarkService {
@@ -19,6 +23,15 @@ function createBookmarkService(bookmarkRepository: BookmarkRepository): Bookmark
     },
     upsertBookmark: (id: string, bookmarkData: UserBookmark) => {
       const bookmark = bookmarkRepository.upsertBookmarkById(id, bookmarkData);
+
+      return bookmark;
+    },
+    createBookmark: (bookmarkData: Bookmark) => {
+      const bookmarkId = nanoid();
+      const bookmark = bookmarkRepository.upsertBookmarkById(bookmarkId, {
+        ...bookmarkData,
+        bookmarkId
+      });
 
       return bookmark;
     }

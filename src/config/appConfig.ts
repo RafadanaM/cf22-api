@@ -11,7 +11,9 @@ export function createAppConfig(env: AppEnvSchema): AppConfig {
     port: env.APP_PORT,
     environment: env.NODE_ENV,
     commitHash: env.COMMIT_HASH,
-    origin: env.ORIGIN
+    origin: env.ORIGIN,
+    cfAPIKey: env.CLOUDFLARE_API_TOKEN,
+    cfZoneId: env.CLOUDFLARE_ZONE_ID
   };
 
   return appConfigInstance;

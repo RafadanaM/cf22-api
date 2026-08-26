@@ -11,3 +11,17 @@ export class RepositoryError extends Error {
     this.name = 'RepositoryError';
   }
 }
+
+export class ExternalFetchError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ExternalFetchError';
+  }
+}
+
+export class ParsingError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ParsingError';
+  }
+}

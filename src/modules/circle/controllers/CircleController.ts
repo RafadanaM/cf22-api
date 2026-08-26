@@ -11,8 +11,18 @@ function createCircleController(
   const billController = new Elysia({ prefix: '/circles' })
     .use(appPlugin)
     .use(circlePlugin)
-    .get('/', ({ circleService }) => {
-      return circleService.getCircles();
+    .get('/', async ({ circleService, headers, set }) => {
+      const { circles, version } = await circleService.getCircles();
+
+      if (headers['if-none-match'] === version) {
+        set.status = 304;
+        return undefined;
+      }
+
+      set.headers['etag'] = version;
+      set.headers['cache-control'] = 'no-cache';
+
+      return circles;
     });
 
   return billController;

@@ -1,17 +1,33 @@
-type NormalizedCircleType = 'BOOTH_B' | 'BOOTH_A' | '1_SPACE' | '4_SPACE' | '2_SPACE';
+export type LargeCircleType = 'BOOTH_B' | 'BOOTH_A';
+export type DefaultCircleType = '1_SPACE' | '4_SPACE' | '2_SPACE';
+/**
+ * BOOTH_B: Big booths (AA-Ag) that occupies 2 spaces
+ * BOOTH_A: Big booths (AA-Ag) that occupies 1 space
+ * 1_SPACE: Normal booths (A-Z) that occupies 1 space
+ * 2_SPACE: Normal booths (A-Z) that occupies 2 spaces
+ * 4_SPACE: Normal booths (A-Z) that occupies 4 spaces
+ *
+ */
+export type CircleType = DefaultCircleType | LargeCircleType;
 
-type AttendingDay = 'SAT' | 'SUN';
+export type AttendingDay = 'SAT' | 'SUN';
 
-type SocialMediaKind = 'FACEBOOK' | 'TWITTER' | 'INSTAGRAM' | 'OTHER';
+export type SocialMediaKind = 'FACEBOOK' | 'TWITTER' | 'INSTAGRAM' | 'OTHER';
 
-type SocialMediaDetail = {
+export type SocialMediaDetail = {
   kind: SocialMediaKind;
   url: string;
 };
 
 export type CircleId = string;
 
-type Rating = 'M' | 'PG' | 'GA';
+export type Rating = 'M' | 'PG' | 'GA';
+
+export type CircleDisplayConfig = {
+  backgroundColor: string;
+  borderColor: string;
+  backgroundColorHover: string;
+};
 
 export type Circle = {
   id: CircleId;
@@ -23,19 +39,26 @@ export type Circle = {
   attendingDays: AttendingDay[];
   socialMedias: SocialMediaDetail[];
   rating: Rating;
-  circleType: NormalizedCircleType;
+  circleType: CircleType;
   rect: BoothRect;
+  displayConfig: CircleDisplayConfig;
+  sampleWorks: string[];
 };
 
-type BoothRect = {
+export type BoothRect = {
   x: number;
   y: number;
   width: number;
   height: number;
-  type: 'VERTICAL' | 'HORIZONTAL' | 'SQUARE';
+  /**
+   * VERTICAL: Booths are stacked vertically
+   * HORIZONTAL: Booths are stacked horizontally
+   */
+  direction: 'VERTICAL' | 'HORIZONTAL';
 };
 
 export type NormalizedCircles = {
   circles: Circle[];
   fandoms: string[];
+  fillerCircles: Circle[];
 };

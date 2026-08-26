@@ -56,16 +56,25 @@ const loggerPlugin = new Elysia({ name: 'logger-plugin' })
 
       case 'UNKNOWN':
       case 'INTERNAL_SERVER_ERROR':
-        logger.error({
-          ...errorCtx,
-          name: error.name,
-          message: error.message,
-          stack: error.stack,
-          cause: error.cause instanceof Error ? error.cause.message : error.cause
-        });
-        break;
       default:
-        logger.error({ ...errorCtx, ...error });
+        {
+          const errData =
+            error instanceof Error
+              ? {
+                  name: error.name,
+                  message: error.message,
+                  stack: error.stack,
+                  cause: error.cause
+                }
+              : { ...error };
+
+          logger.error({
+            ...errorCtx,
+            ...errData
+          });
+        }
+
+        break;
     }
   });
 

@@ -1,9 +1,8 @@
 import { Elysia } from 'elysia';
 
-import createCircleService from '../services/CircleService';
+import type { CircleService } from '../services/CircleService';
 
-function createCirclePlugin() {
-  const circleService = createCircleService();
+function createCirclePlugin(circleService: CircleService) {
   const circlePlugin = new Elysia({
     name: 'circlePlugin'
   }).decorate('circleService', circleService);

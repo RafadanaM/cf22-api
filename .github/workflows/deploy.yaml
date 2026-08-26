@@ -21,14 +21,13 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}/apps/cf22-api
+            set -e
 
-            git pull origin master
+            echo "Setting up directories and files..."
+            mkdir -p $HOME/apps/my-app
+            cd $HOME/apps/cf22-api && git pull origin master
 
-            export IMAGE_TAG=sha-$(git rev-parse --short HEAD)
+            echo "Running deploy script..."
+            ./scripts/deploy.sh
 
-            docker compose pull
-
-            docker compose up -d --remove-orphans
-
-            docker image prune -f
+            echo "Deploy script complete."

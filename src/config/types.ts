@@ -5,4 +5,6 @@ export type AppConfig = {
   port: string;
   commitHash: string;
   origin: string;
+  cfAPIKey: string;
+  cfZoneId: string;
 };
