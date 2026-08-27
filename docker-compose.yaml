@@ -3,6 +3,12 @@ services:
     image: rafadanam/cf22-api:${IMAGE_TAG}
     container_name: cf22-api
     restart: always
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:${APP_PORT}/healthcheck']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     env_file:
       - .env
     environment:
